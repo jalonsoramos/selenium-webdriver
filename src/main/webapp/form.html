@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Selenium2 </title>
+
+<style type="text/css">
+  #formularioPruebas { font-family: Verdana; margin: 10px:}
+  #formularioPruebas fieldset { width: 400px; }
+  #formularioPruebas label { display: block;   margin: .5em 0 0 0; }
+  #formularioPruebas input select { width: 300px;}
+</style>
+
+<script>
+	function isValidForm() {
+		var nombre = document.getElementById("nombre").value;
+		var apellidos = document.getElementById("apellidos").value;
+		var email = document.getElementById("email").value;
+		var ciudades = document.getElementById("ciudad");	
+		var ciudad = ciudades.options[ciudades.selectedIndex].value;
+		var newsletterSi = document.getElementById("newslettersSi");
+		var newsletterNo = document.getElementById("newslettersNo");
+		
+		var checkedNewsletter = false;
+		if (newsletterSi.checked || newsletterNo.checked) {
+			checkedNewsletter = true;
+		}
+		
+		if (nombre == "" || apellidos == "" || email == "" || ciudad == -1 || !checkedNewsletter) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	function validate() {
+		if (isValidForm()) { 
+			alert('OK'); 
+		} else { 
+			alert('Faltan datos por rellenar');
+		}
+	}
+</script>
+</head>
+<body>	
+	
+	<form id="formularioPruebas">
+		<fieldset>
+			<legend>Rellene todos los datos</legend>	
+				<label for="nombre">Nombre:</label>
+				<input type="text" id="nombre" />
+				
+				<label for="apellidos">Apellidos:</label>
+				<input type="text" id="apellidos" />
+				
+				<label for="email">E-mail:</label>
+				<input type="text" id="email" />
+			
+				<label for="ciudad">Ciudad:</label>
+				<select id="ciudad">
+					<option value="-1">--Seleccionar--</option>
+					<option value="0">Barcelona</option>
+					<option value="1">Madrid</option>
+					<option value="2">Valencia</option>
+					<option value="3">Zaragoza</option>
+				</select>
+			
+				<label for="newslettersSi">Deseo recibir newsletters:</label>
+				<input type="radio" name="newsletters" id="newslettersSi" value="true">Sí
+				<input type="radio" name="newsletters" id="newslettersNo" value="false">No
+				
+				<input type="button" id="enviar" value="Enviar" onclick="validate();" />
+		</fieldset>
+	</form>
+</body>
+</html>
